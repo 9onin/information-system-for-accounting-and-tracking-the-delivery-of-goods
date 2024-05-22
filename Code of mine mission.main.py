@@ -1,5 +1,4 @@
-# Установка Flask:
-pip install Flask
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -45,6 +44,4 @@ def get_orders():
     
     return render_template('orders.html', orders=orders)
 
-if __name__ == '__main__':
-    app.run(debug=True)
 
