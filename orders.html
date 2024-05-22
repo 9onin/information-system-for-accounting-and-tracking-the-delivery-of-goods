@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Информационная система учета и отслеживания доставки товаров</title>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Заказы</h1>
+        <table>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Статус</th>
+                <th>Дата доставки</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
