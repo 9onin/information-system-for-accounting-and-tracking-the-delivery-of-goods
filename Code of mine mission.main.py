@@ -9,20 +9,23 @@ def _create_db():
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
 
-    # Создание таблицы для хранения заказов
-    c.execute('DROP TABLE IF EXISTS orders')
-    c.execute('''CREATE TABLE orders
-                (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                order_number TEXT,
-                status TEXT,
-                estimated_delivery_date TEXT)''')
+    try:
+        # Создание таблицы для хранения заказов
+        c.execute('''CREATE TABLE orders
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    order_number TEXT,
+                    status TEXT,
+                    estimated_delivery_date TEXT)''')
 
-    # Внесение тестовых данных
-    c.execute("INSERT INTO orders (order_number, status, estimated_delivery_date) VALUES ('1', 'В пути', '2022-10-10')")
-    c.execute("INSERT INTO orders (order_number, status, estimated_delivery_date) VALUES ('2', 'Доставлено', '2022-09-30')")
+        # Внесение тестовых данных
+        c.execute("INSERT INTO orders (order_number, status, estimated_delivery_date) VALUES ('1', 'В пути', '2022-10-10')")
+        c.execute("INSERT INTO orders (order_number, status, estimated_delivery_date) VALUES ('2', 'Доставлено', '2022-09-30')")
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
+    finally:
+        conn.close()
 
 
 app = Flask(__name__)
